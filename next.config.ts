@@ -8,7 +8,7 @@ experimental: {
   serverActions: {
     bodySizeLimit: '100MB',
   }
-}
+},
   images: {
     remotePatterns: [
       {
