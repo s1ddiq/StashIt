@@ -1,22 +1,19 @@
-import { prototype } from "events";
-import type { NextConfig } from "next";
-import { hostname } from "os";
+import { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-experimental: {
-  serverActions: {
-    bodySizeLimit: '100MB',
-  }
-},
+  api: {
+    bodyParser: {
+      sizeLimit: '100mb',
+    },
+  },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'cloud.appwrite.io'
-      }
-    ]
-  }
+        hostname: 'cloud.appwrite.io',
+      },
+    ],
+  },
 };
 
 export default nextConfig;
