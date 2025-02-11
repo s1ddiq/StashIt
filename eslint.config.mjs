@@ -17,6 +17,12 @@ const eslintConfig = [
     "plugin:tailwindcss/recommended",
     "prettier"
   ),
+  {
+    rules: {
+      "no-lone-blocks": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+    },
+  },
 ];
 
 export default eslintConfig;

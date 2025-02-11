@@ -189,4 +189,3 @@ export async function getTotalSpaceUsed () {
 }
 
 
-{/* getTotalSpaceUsed({bucketId: '67a2a045001d8df7bff8', userId: '67a7999700091e165673'})*/}
