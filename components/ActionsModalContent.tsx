@@ -74,7 +74,7 @@ const ShareInput = ({ file, onInputChange, onRemove }: Props) => {
             </p>
           </div>
           <ul className="pt-2">
-            {file.users.map((email) => (
+            {file.users.map((email: string) => (
               <li
                 key={email}
                 className="flex items-center justify-between gap-2"
