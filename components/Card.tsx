@@ -7,7 +7,6 @@ import FormattedDateTime from "./FormattedDateTime";
 import ActionsDropdown from "./ActionsDropdown";
 
 const Card = ({ file }: { file: Models.Document }) => {
-  console.log(`ID` + file.bucketFileId);
   return (
     <Link href={file.url} target="_blank" className="file-card">
       <div className="flex justify-between">

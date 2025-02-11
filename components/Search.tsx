@@ -38,7 +38,6 @@ const Search = () => {
   }, []);
 
   const handleClickItem = (file: Models.Document) => {
-    console.log("hi");
     setOpen(false);
     setResults([]);
     router.push(

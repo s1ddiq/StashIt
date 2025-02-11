@@ -69,7 +69,6 @@ export const verifySecret = async ({accountId, password}: {accountId: string, pa
             secure: true,
         })
 
-        console.log(`SESSION ID` +session.$id)
 
         return parseStringify({sessionId: session.$id});
     } catch (error) {

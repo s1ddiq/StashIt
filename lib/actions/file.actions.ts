@@ -95,7 +95,6 @@ export const getFiles = async ({types = [], searchText = '', sort = '$createdAt-
       queries,
     );
 
-    console.log({files})
     return parseStringify(files);
   } catch (error) {
     handleError(error, 'Failed to fetch files')
@@ -105,7 +104,6 @@ export const getFiles = async ({types = [], searchText = '', sort = '$createdAt-
 export const renameFile = async ({fileId, name, extension, path}: RenameFileProps) => {
   const {databases} = await createAdminClient();
 
-  console.log('renaming file...')
   try {
     const newName = `${name}.${extension}`;
     const updatedFile = await databases.updateDocument(appwriteConfig.databaseId, appwriteConfig.filesCollectionId, fileId, {name: newName});
@@ -120,7 +118,6 @@ export const renameFile = async ({fileId, name, extension, path}: RenameFileProp
 export const updateFileUsers = async ({fileId, emails, path}: UpdateFileUsersProps) => {
   const {databases} = await createAdminClient();
 
-  console.log('sharing file...')
   try {
     const updatedFile = await databases.updateDocument(appwriteConfig.databaseId, appwriteConfig.filesCollectionId, fileId, {users: emails});
 
