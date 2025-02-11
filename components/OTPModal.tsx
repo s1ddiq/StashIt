@@ -25,7 +25,7 @@ const OTPModal = ({
   accountId,
 }: {
   email: string;
-  accountId: string | any;
+  accountId: string;
 }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(true);

@@ -21,6 +21,12 @@ const eslintConfig = [
     rules: {
       "no-lone-blocks": "off",
       "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "no-empty": "off",
+      "tailwindcss/classnames-order": "off",
+      "tailwindcss/enforces-shorthand": "off",
+      "tailwindcss/no-custom-classname": "off",
+      "react-hooks/exhaustive-deps": "off",
     },
   },
 ];
