@@ -1,7 +1,7 @@
 "use client";
+/* eslint-disable  no-explicit-any */
 import React, { useState } from "react";
 import Image from "next/image";
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,13 +15,11 @@ import {
 import {
   InputOTP,
   InputOTPGroup,
-  InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { Button } from "./ui/button";
 import { verifySecret, sendEmailOTP } from "@/lib/actions/user.actions";
 import { useRouter } from "next/navigation";
-import { send } from "process";
 
 const OTPModal = ({
   email,
@@ -39,7 +37,6 @@ const OTPModal = ({
     e.preventDefault();
     setIsLoading(true);
     try {
-      // Call your API here
       const sessionId = await verifySecret({ accountId, password });
 
       if (sessionId) router.push("/");

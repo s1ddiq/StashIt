@@ -1,12 +1,10 @@
 'use server'
-
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import { createAdminClient, createSessionClient } from "@/lib/appwrite";
 import { appwriteConfig } from "../appwrite/config";
 import { ID, Query } from "node-appwrite";
 import { parseStringify } from "../utils";
-import { create } from "domain";
 import { cookies } from "next/headers";
-import { parse } from "path";
 import { avatarPlaceholderUrl } from "@/constants";
 import { redirect } from "next/navigation";
 

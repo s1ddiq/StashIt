@@ -2,9 +2,8 @@
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { Button } from "./ui/button";
-import { cn, convertFileToUrl } from "@/lib/utils";
+import { cn, convertFileToUrl, getFileType } from "@/lib/utils";
 import Image from "next/image";
-import { getFileType } from "@/lib/utils";
 import Thumbnail from "./Thumbnail";
 import { MAX_FILE_SIZE } from "@/constants";
 import { useToast } from "@/hooks/use-toast";

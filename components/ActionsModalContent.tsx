@@ -26,7 +26,7 @@ const DetailRow = ({ label, value }: { label: string; value: string }) => (
   </div>
 );
 
-export const FileDetails = ({ file }: { file: Models.Document }) => {
+const FileDetails = ({ file }: { file: Models.Document }) => {
   return (
     <>
       <ImageThumbnail file={file} />
@@ -100,4 +100,4 @@ const ShareInput = ({ file, onInputChange, onRemove }: Props) => {
   );
 };
 
-export default ShareInput;
+export { ShareInput, FileDetails };

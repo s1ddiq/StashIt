@@ -5,11 +5,9 @@ import Image from "next/image";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   DropdownMenu,
@@ -32,8 +30,7 @@ import {
   updateFileUsers,
 } from "@/lib/actions/file.actions";
 import { usePathname } from "next/navigation";
-import { FileDetails } from "./ActionsModalContent";
-import ShareInput from "@/components/ActionsModalContent";
+import { FileDetails, ShareInput } from "./ActionsModalContent";
 
 const ActionsDropdown = ({ file }: { file: Models.Document }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);

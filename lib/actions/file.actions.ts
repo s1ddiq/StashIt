@@ -1,6 +1,6 @@
 'use server';
 
-import { DeleteFileProps, FileType, GetFilesProps, RenameFileProps, TotalSpaceUsedProps, UpdateFileUsersProps, UploadFileProps } from "@/types/index";
+import { DeleteFileProps, FileType, GetFilesProps, RenameFileProps, UpdateFileUsersProps, UploadFileProps } from "@/types/index";
 import { createAdminClient, createSessionClient } from "../appwrite";
 import { InputFile } from "node-appwrite/file";
 import { ID, Models, Query } from "node-appwrite";
@@ -189,4 +189,4 @@ export async function getTotalSpaceUsed () {
 }
 
 
-// getTotalSpaceUsed({bucketId: '67a2a045001d8df7bff8', userId: '67a7999700091e165673'})
+{/* getTotalSpaceUsed({bucketId: '67a2a045001d8df7bff8', userId: '67a7999700091e165673'})*/}

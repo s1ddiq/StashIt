@@ -48,10 +48,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
     },
   });
 
-  // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     setIsLoading(true);
     setErrorMessage("");
 
@@ -66,7 +63,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
       setAccountId(user.accountId);
     } catch (error) {
-      setErrorMessage("Failed to create account. Please try again.");
+      setErrorMessage(`${error}: Failed to create account. Please try again.`);
     } finally {
       setIsLoading(false);
     }
