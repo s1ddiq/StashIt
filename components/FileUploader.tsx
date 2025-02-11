@@ -59,6 +59,10 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
                 className: "error-toast",
               });
             } else {
+              console.log(error);
+              toast({
+                description: <p className="body-2 text-white">{error}</p>,
+              });
               toast({
                 description: (
                   <p className="body-2 text-white">
