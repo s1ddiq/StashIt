@@ -15,7 +15,7 @@ const handleError = (error: unknown, message: string) => {
 }
 
 
-const CHUNK_SIZE = 10 * 1024 * 1024; // 10MB per chunk (adjust as needed)
+const CHUNK_SIZE = 1 * 1024 * 1024; // 10MB per chunk (adjust as needed)
 
 export const uploadFile = async ({ file, ownerId, accountId, path }: UploadFileProps) => {
   const { storage, databases } = await createAdminClient();
