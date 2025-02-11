@@ -15,46 +15,72 @@ const handleError = (error: unknown, message: string) => {
 }
 
 
+const CHUNK_SIZE = 10 * 1024 * 1024; // 10MB per chunk (adjust as needed)
+
 export const uploadFile = async ({ file, ownerId, accountId, path }: UploadFileProps) => {
   const { storage, databases } = await createAdminClient();
+  
+  const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
+  let currentChunk = 0;
+  const fileId = ID.unique(); // Unique ID for the whole file
 
   try {
-    const inputFile = InputFile.fromBuffer(file, file.name);
-    const bucketFile = await storage.createFile(appwriteConfig.bucketId, ID.unique(), inputFile);
+    // Create the file metadata to store in the database
     const fileDocument = {
-      type: getFileType(bucketFile.name).type,
-      name: bucketFile.name,
-      url: constructFileUrl(bucketFile.$id),
-      extension: getFileType(bucketFile.name).extension,
-      size: bucketFile.sizeOriginal,
+      type: getFileType(file.name).type,
+      name: file.name,
+      url: "", // Will be updated once file is uploaded
+      extension: getFileType(file.name).extension,
+      size: file.size,
       owner: ownerId,
       accountId,
       users: [],
-      bucketFileId: bucketFile.$id
+      bucketFileId: fileId, // Save the unique file ID
+    };
+
+    // Create file document first (before upload)
+    const newFileDoc = await databases.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.filesCollectionId,
+      ID.unique(),
+      fileDocument
+    );
+    
+    // Function to handle chunk upload
+    const uploadChunk = async (chunk: Blob, chunkIndex: number) => {
+      const chunkFile = InputFile.fromBuffer(chunk, `${file.name}-chunk-${chunkIndex}`);
+      const bucketFile = await storage.createFile(appwriteConfig.bucketId, fileId, chunkFile);
+
+      console.log(`Uploaded chunk ${chunkIndex + 1}/${totalChunks}`);
+      return bucketFile;
+    };
+
+    // Upload chunks sequentially or in parallel
+    for (let i = 0; i < totalChunks; i++) {
+      const start = i * CHUNK_SIZE;
+      const end = Math.min(start + CHUNK_SIZE, file.size);
+      const chunk = file.slice(start, end);
+      
+      await uploadChunk(chunk, i);  // You can parallelize this if necessary
     }
 
-    console.log(ownerId);
-    const newFile = await databases
-      .createDocument(
-        appwriteConfig.databaseId,
-        appwriteConfig.filesCollectionId,
-        ID.unique(),
-        fileDocument,
-        
-      )
-      .catch(async (error: unknown) => {
-        await storage.deleteFile(appwriteConfig.bucketId, bucketFile.$id);
-        handleError(error, "Failed to create file document");
-        console.log(storage);
-        console.log('ERROR');
-      });
+    // Update the file document URL with the file's location (after upload)
+    const fileDocumentUrl = constructFileUrl(fileId); // Construct URL based on ID
+    await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.filesCollectionId,
+      newFileDoc.$id,
+      { url: fileDocumentUrl }
+    );
 
+    // Revalidate the path
     revalidatePath(path);
-    return parseStringify(newFile);
+    return parseStringify(newFileDoc);
+
   } catch (error) {
     handleError(error, 'Failed to upload files');
   }
-}
+};
 
 const createQueries = (currentUser: Models.Document, types: string[], searchText: string, sort: string, limit: number) => {
   const queries = [
