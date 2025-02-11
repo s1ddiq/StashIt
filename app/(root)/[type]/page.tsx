@@ -1,7 +1,7 @@
 import Card from "@/components/Card";
 import Sort from "@/components/Sort";
 import { getFiles } from "@/lib/actions/file.actions";
-import { getFileType, getFileTypesParams } from "@/lib/utils";
+import { getFileTypesParams } from "@/lib/utils";
 import { FileType, SearchParamProps } from "@/types";
 import { Models } from "node-appwrite";
 import React from "react";
@@ -15,7 +15,6 @@ const Page = async ({ searchParams, params }: SearchParamProps) => {
     documents: [],
   };
   {
-    /*console.log("THE FILES OBJECT HAS" + files);*/
   }
   return (
     <div className="page-container">
@@ -33,7 +32,6 @@ const Page = async ({ searchParams, params }: SearchParamProps) => {
         </div>
       </section>
 
-      {/* {Dynamically render files} */}
       {files.documents.length > 0 ? (
         <section className="file-list">
           {files.documents.map((file: Models.Document) => (
