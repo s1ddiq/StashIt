@@ -21,7 +21,6 @@ export const uploadFile = async ({ file, ownerId, accountId, path }: UploadFileP
   const { storage, databases } = await createAdminClient();
   
   const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
-  let currentChunk = 0;
   const fileId = ID.unique(); // Unique ID for the whole file
 
   try {
